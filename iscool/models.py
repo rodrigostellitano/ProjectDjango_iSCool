@@ -55,7 +55,7 @@ class AvaliationModel(models.Model):
     student_has_discipline_id = models.ForeignKey(Student_has_Discipline,on_delete=models.CASCADE)
     
 
-       # I stopped using that form and created the relationship table manually
+       #aa I stopped using that form and created the relationship table manually
     #student_id = models.OneToOneField(StudentModel,null=False,on_delete=CASCADE,unique=True)
     #discipline_id = models.OneToOneField(DisciplineModel,null=False,on_delete=CASCADE,unique=True)
    
