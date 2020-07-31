@@ -18,6 +18,8 @@ class DisciplineModel(models.Model):
     def __str__(self):
         return self.name
 
+        
+
 class StudentModel(models.Model):
 
         # INSERT IN THE DB TO STUDENT_ID START 1000: ALTER TABLE iscool_studentmodel AUTO_INCREMENT = 1000;
