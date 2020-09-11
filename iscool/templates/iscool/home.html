@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %} 
+
+{% for StudentModel in object_list %}
+    <h1>{{StudentModel.name}}</h1>
+    <h1>{{StudentModel.age }}</h1>
+
+{% endfor%}
+
+
+{% endblock content %}
