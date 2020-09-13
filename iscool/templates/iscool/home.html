@@ -6,8 +6,12 @@
 {% block content %} 
 
 {% for StudentModel in object_list %}
-    <h1>{{StudentModel.name}}</h1>
-    <h1>{{StudentModel.age }}</h1>
+    <div>Matrícula: {{StudentModel.student_id}}</div>
+    <div>Nome: {{StudentModel.name}}</div>    
+    <div>Idade: {{StudentModel.age }}</div>
+    <p>
+    
+    
 
 {% endfor%}
 

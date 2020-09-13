@@ -8,8 +8,15 @@
     <title>{% block title %}  {% endblock title %}</title>
 </head>
 <body>
+    <ul>
+        <li><a href="{% url 'home'%}">Home</a></li>
+        <li><a href="{% url 'student_register'%}">Registrar</a></li>
+    
+    
+    
+    </ul>
     {% block content %} {% endblock content %}
 
-    <footer>Footer</footer>
+    <footer><br>Footer</footer>
 </body>
 </html>

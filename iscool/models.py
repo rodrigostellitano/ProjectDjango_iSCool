@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.db.models import *
 
 
@@ -23,16 +24,19 @@ class DisciplineModel(models.Model):
 class StudentModel(models.Model):
 
         # INSERT IN THE DB TO STUDENT_ID START 1000: ALTER TABLE iscool_studentmodel AUTO_INCREMENT = 1000;
-    student_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=250)
-    age = models.IntegerField(validators=[MinValueValidator(3), MaxValueValidator(20)])
+    student_id = models.AutoField(primary_key=True, verbose_name= "Matrícula")
+    name = models.CharField(max_length=250,verbose_name= "Nome")
+    age = models.IntegerField(validators=[MinValueValidator(3), MaxValueValidator(20)],verbose_name= "Idade")
        
     def __str__(self):
         return self.name
 
-     #I stopped using that form and created the relationship table manually
-    #discipline = models.ManyToManyField(DisciplineModel, blank=True)
+    
+        # WHY NEED TO USE ABSOLUTE URL TO CREATEVIEW?
+    def get_absolute_url(self):
+        return reverse('student_detail', args=[self.student_id])
 
+       
 
 
 class Student_has_Discipline(models.Model):
@@ -40,6 +44,10 @@ class Student_has_Discipline(models.Model):
     student_has_discipline_id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(StudentModel,on_delete=models.CASCADE)
     discipline_id = models.ForeignKey(DisciplineModel, on_delete=models.CASCADE)
+
+
+
+
 
 
 class AvaliationModel(models.Model):
@@ -57,10 +65,7 @@ class AvaliationModel(models.Model):
     student_has_discipline_id = models.ForeignKey(Student_has_Discipline,on_delete=models.CASCADE)
     
 
-       # I stopped using that form and created the relationship table manually
-    #student_id = models.OneToOneField(StudentModel,null=False,on_delete=CASCADE,unique=True)
-    #discipline_id = models.OneToOneField(DisciplineModel,null=False,on_delete=CASCADE,unique=True)
-   
+     
     
 
 
