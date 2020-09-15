@@ -1,18 +1,24 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Detail {% endblock title %}
+{% block title %} Student Detail {% endblock title %}
 
 {% block content %} 
-
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 <div>Matrícula: {{object.student_id}}</div>
 <div>Nome: {{object.name}}</div>    
 <div>Idade: {{object.age }}</div>
 <p>
    
-
-
+    <a href="{{ object.get_absolute_url_update}}">Edit</a><br>
+    <a href="{{ object.get_absolute_url_delete }}">Delete</a> 
 
 
 {% endblock content %}

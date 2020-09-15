@@ -5,10 +5,21 @@
 
 {% block content %} 
 
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% for StudentModel in object_list %}
-    <div>Matrícula: {{StudentModel.student_id}}</div>
+    <div>Matrícula: <a href="{{StudentModel.get_absolute_url}}">{{StudentModel.student_id}}</a></div>
     <div>Nome: {{StudentModel.name}}</div>    
     <div>Idade: {{StudentModel.age }}</div>
+
+   
     <p>
     
     

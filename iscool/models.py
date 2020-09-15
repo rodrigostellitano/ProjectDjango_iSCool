@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from django.urls import reverse
+
 from django.db.models import *
 
 
@@ -36,7 +37,11 @@ class StudentModel(models.Model):
     def get_absolute_url(self):
         return reverse('student_detail', args=[self.student_id])
 
-       
+    def get_absolute_url_delete(self):
+        return reverse('student_delete', args=[self.student_id])
+
+    def get_absolute_url_update(self):
+        return reverse('student_edit', args=[self.pk])
 
 
 class Student_has_Discipline(models.Model):
