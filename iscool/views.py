@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, DeleteView,UpdateView
 from django.views.generic.edit import CreateView
+from django.views.generic.base import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
 from . models import StudentModel
+
+from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -47,3 +51,13 @@ class isCoolStudentEditView(SuccessMessageMixin, UpdateView):
     
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data,fields=self.object.student_id,)
+
+
+
+class isCoolHomePage(TemplateView):
+    """
+    Because our needs are so simple, all we have to do is
+    assign one value; template_name. The home.html file will be created
+    in the next lesson.
+    """
+    template_name = 'iscool/home.html'
