@@ -14,7 +14,7 @@ from django.http import HttpResponse
 
 class isCoolStudentListView(ListView):
     model = StudentModel
-    template_name = 'iscool/home.html'
+    template_name = 'iscool/student_list.html'
 
 
 
@@ -55,9 +55,11 @@ class isCoolStudentEditView(SuccessMessageMixin, UpdateView):
 
 
 class isCoolHomePage(TemplateView):
-    """
-    Because our needs are so simple, all we have to do is
-    assign one value; template_name. The home.html file will be created
-    in the next lesson.
-    """
+
     template_name = 'iscool/home.html'
+
+
+
+class isCoolUnderConstruction(TemplateView):
+
+    template_name = 'iscool/underconstruction.html'
