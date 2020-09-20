@@ -20,6 +20,7 @@ class DisciplineModel(models.Model):
     def __str__(self):
         return self.name
 
+
         
 
 class StudentModel(models.Model):
@@ -31,6 +32,7 @@ class StudentModel(models.Model):
        
     def __str__(self):
         return self.name
+
 
     
         # WHY NEED TO USE ABSOLUTE URL TO CREATEVIEW?

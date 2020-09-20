@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.db.models import Q
 from . models import StudentModel
 
 from django.shortcuts import render
@@ -15,7 +16,17 @@ from django.http import HttpResponse
 class isCoolStudentListView(ListView):
     model = StudentModel
     template_name = 'iscool/student_list.html'
+    context_object_name = 'student_age'
 
+    def get_queryset(self):
+
+        # Set the query's default value to "" if not an error, you probably look for a query with a value of NONE (error you presented) and find nothing.
+        query_student_id = self.request.GET.get('q', "")
+        query_age = self.request.GET.get('item_id', "")
+        object_list = StudentModel.objects.filter(
+          Q(student_id__icontains=query_student_id) | Q(age__icontains=query_age)
+       )
+        return object_list
 
 
     # WHY NEED TO USE ABSOLUTE URL IN MODEL TO CREATEVIEW?
@@ -34,9 +45,9 @@ class isCoolStudentDetailView(DetailView):
 class isCoolStudentDeleteView(SuccessMessageMixin,DeleteView):
     model = StudentModel
     template_name = 'iscool/student_delete.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('student_list')
     
-    success_message = "Deletado com sucesso!"
+    success_message = "%(name)s - Deletado com sucesso!"
 
     def delete(self, request, *args,**kwargs):
         messages.success(self.request,self.success_message)

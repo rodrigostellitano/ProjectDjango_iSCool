@@ -7,7 +7,21 @@
 
 <h1 class = 'p-3 mb-2 bg-info text-dark'>Lista de Estudantes</h1>
 
+<div class="active-cyan-3 active-cyan-4 mb-4"><form action="{% url 'student_list' %}" method="get">
+    <input name="q" class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <button type="submit"><i class="fa fa-search"></i></button>
 
+    <select name="item_id" >
+    <option selected="selected">Idade</option>   
+    {% for entry in student_age %}
+    <option value="{{ entry.id }}">{{ entry.age }}</option>
+    {% endfor %}
+    </select>
+</form>
+
+</div>
+<p>
+<div>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -15,11 +29,13 @@
     {% endfor %}
 </ul>
 {% endif %}
-
+</div>
 {% for StudentModel in object_list %}
     <div>Matrícula: <a href="{{StudentModel.get_absolute_url}}">{{StudentModel.student_id}}</a></div>
     <div>Nome: {{StudentModel.name}}</div>    
     <div>Idade: {{StudentModel.age }}</div>
+    {% empty %}
+    <h2>Nenhum aluno encontrado</h2>
 
    
     <p>
