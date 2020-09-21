@@ -21,10 +21,12 @@ class isCoolStudentListView(ListView):
     def get_queryset(self):
 
         # Set the query's default value to "" if not an error, you probably look for a query with a value of NONE (error you presented) and find nothing.
-        query_student_id = self.request.GET.get('q', "")
-        query_age = self.request.GET.get('item_id', "")
+        query_student_name = self.request.GET.get('query_student_name', "")
+        #query_age = self.request.GET.get('query_age', "")
+
         object_list = StudentModel.objects.filter(
-          Q(student_id__icontains=query_student_id) | Q(age__icontains=query_age)
+          Q(name__icontains=query_student_name) 
+          #| Q(age__icontains=query_age)
        )
         return object_list
 

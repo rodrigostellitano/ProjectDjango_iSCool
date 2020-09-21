@@ -7,17 +7,20 @@
 
 <h1 class = 'p-3 mb-2 bg-info text-dark'>Lista de Estudantes</h1>
 
-<div class="active-cyan-3 active-cyan-4 mb-4"><form action="{% url 'student_list' %}" method="get">
-    <input name="q" class="form-control" type="text" placeholder="Search" aria-label="Search">
-    <button type="submit"><i class="fa fa-search"></i></button>
+<div class="active-cyan-3 active-cyan-4 mb-4">
+    
+    <form action="{% url 'student_list' %}" method="get">
+    <input name="query_student_name" class="form-control" type="text" placeholder="Search" aria-label="Search"> 
+       
 
-    <select name="item_id" >
-    <option selected="selected">Idade</option>   
-    {% for entry in student_age %}
-    <option value="{{ entry.id }}">{{ entry.age }}</option>
-    {% endfor %}
-    </select>
-</form>
+        <!-- <select name="query_age" >
+            <option selected="selected">Idade</option>   
+            {% for entry in student_age %}
+            <option value="{{ entry.id }}">{{ entry.age }}</option>
+            {% endfor %}
+        </select> -->
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
 
 </div>
 <p>

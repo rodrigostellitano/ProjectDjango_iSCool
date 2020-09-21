@@ -12,12 +12,13 @@
     </ul>
     {% endif %}
 
+<h1>Detalhes</h1>
 <div>Matrícula: {{object.student_id}}</div>
 <div>Nome: {{object.name}}</div>    
 <div>Idade: {{object.age }}</div>
 <p>
    
-    <a href="{{ object.get_absolute_url_update}}">Edit</a><br>
+    <a href="{{ object.get_absolute_url_update}}">Edit</a> 
     <a href="{{ object.get_absolute_url_delete }}">Delete</a> 
 
 
