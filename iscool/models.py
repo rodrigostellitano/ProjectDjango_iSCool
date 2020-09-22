@@ -9,9 +9,8 @@ from django.db.models import *
 """
 TASK
 - Run o auto increment 1000 na tabela StudentModel
-
-
 """
+
 class DisciplineModel(models.Model):
 
     discipline_id = models.AutoField(primary_key=True)
