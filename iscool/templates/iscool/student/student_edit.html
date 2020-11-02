@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} {{block.super}} - Student Edit {% endblock title %}
+
+
+
+{% block content %}
+
+
+
+<form action="" method='POST'>{% csrf_token %}
+    <div>
+        <h2><strong>Matrícula:</strong> {{student.student_id}}</h2>
+    </div>
+    {{form.as_p}}
+
+    <input type='submit' value='Salvar'>
+</form>
+
+
+
+
+{% endblock content %}

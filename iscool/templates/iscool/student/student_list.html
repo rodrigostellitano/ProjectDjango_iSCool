@@ -1,7 +1,7 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Student List {% endblock title %}
+{% block title %} {{block.super}} - Student List {% endblock title %}
 
 {% block content %} 
 
@@ -33,10 +33,14 @@
 </ul>
 {% endif %}
 </div>
+<hr/>
 {% for StudentModel in object_list %}
     <div>Matrícula: <a href="{{StudentModel.get_absolute_url}}">{{StudentModel.student_id}}</a></div>
     <div>Nome: {{StudentModel.name}}</div>    
     <div>Idade: {{StudentModel.age }}</div>
+    <a href="{{ StudentModel.get_absolute_url_update}}">Edit</a> 
+    <a href="{{ StudentModel.get_absolute_url_delete }}">Delete</a> 
+    <hr/>
     {% empty %}
     <h2>Nenhum aluno encontrado</h2>
 

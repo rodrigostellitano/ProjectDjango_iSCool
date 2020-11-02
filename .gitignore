@@ -2,3 +2,4 @@
 *.jpg
 .vscode
 password.py
+dbInserts

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} {{block.super}} - Discipline List {% endblock title %}
+
+
+
+{% block content %}
+
+
+<h1>Lista</h1>
+
+
+{% for objs in obj %}
+<div>
+    {{objs.name}}
+</div>
+
+{% endfor%}
+
+{% endblock content %}
