@@ -15,36 +15,28 @@ from . forms import StudentForm
 # Create your views here.
 
 
-class isCoolStudentListView(ListView):
-    model = StudentModel
+def iscool_student_list_view(request):
     template_name = 'iscool/student/student_list.html'
-    context_object_name = 'student_age'
+    context = {}
+    try:
+        context['StudentModels'] = StudentModel.objects.all()
 
-    def get_queryset(self):
+    except StudentModel.DoesNotExist:
+        raise Http404
 
-        # Set the query's default value to "" if not an error, you probably look for a query with a value of NONE (error you presented) and find nothing.
-        query_student_name = self.request.GET.get('query_student_name', "")
-        # query_age = self.request.GET.get('query_age', "")
-
-        object_list = StudentModel.objects.filter(
-            Q(name__icontains=query_student_name)
-            # | Q(age__icontains=query_age)
-        )
-        return object_list
+    return render(request, template_name, context)
 
 
 def iscool_student_register_view(request):
 
     template_name = 'iscool/student/student_register.html'
-    form = StudentForm(request.POST or None)
     context = {}
+    context['StudentForm'] = StudentForm(request.POST or None)
 
-    if form.is_valid():
-        detail_id = form.save()
+    if context['StudentForm'].is_valid():
+        detail_id = context['StudentForm'].save()
 
         return redirect('student_detail', detail_id.pk)
-
-    context = {"form": form}
 
     return render(request, template_name, context)
 
@@ -59,27 +51,15 @@ def iscool_student_detail_view(request, pk):
     return render(request, template_name, context)
 
 
-class isCoolStudentDeleteView(SuccessMessageMixin, DeleteView):
-    model = StudentModel
+def iscool_student_delete_view(request, pk):
     template_name = 'iscool/student/student_delete.html'
-    success_url = reverse_lazy('student_list')
-
-    success_message = "%(name)s - Deletado com sucesso!"
-
-    def delete(self, request, *args, **kwargs):
-        obj = self.get_object()
-        messages.success(self.request, self.success_message % obj.__dict__)
-        return super(isCoolStudentDeleteView, self).delete(request, *args, **kwargs)
-
-
-class isCoolStudentEditView(SuccessMessageMixin, UpdateView):
-    model = StudentModel
-    template_name = 'iscool/student/student_edit.html'
-    fields = '__all__'
-    success_message = "%(name)s - alterado com sucesso!"
-
-    def get_success_message(self, cleaned_data):
-        return self.success_message % dict(cleaned_data, fields=self.object.student_id,)
+    context = {}
+    context["StudentModel"] = StudentModel.objects.get(pk=pk)
+    if request.method == 'POST':
+        context["StudentModel"].delete()
+        return redirect('student_list')
+    else:
+        return render(request, template_name, context)
 
 
 def iscool_student_edit_view(request, pk):
@@ -121,6 +101,33 @@ def iscool_discipline_list_view(request):
     return render(request, 'iscool/discipline/discipline_list.html',
                   {'obj': obj})
 
+
+# class isCoolStudentListView(ListView):
+#     model = StudentModel
+#     template_name = 'iscool/student/student_list.html'
+#     context_object_name = 'student_age'
+
+#     def get_queryset(self):
+
+#         # Set the query's default value to "" if not an error, you probably look for a query with a value of NONE (error you presented) and find nothing.
+#         query_student_name = self.request.GET.get('query_student_name', "")
+#         # query_age = self.request.GET.get('query_age', "")
+
+#         object_list = StudentModel.objects.filter(
+#             Q(name__icontains=query_student_name)
+#             # | Q(age__icontains=query_age)
+#         )
+#         return object_list
+
+# class isCoolStudentEditView(SuccessMessageMixin, UpdateView):
+#     model = StudentModel
+#     template_name = 'iscool/student/student_edit.html'
+#     fields = '__all__'
+#     success_message = "%(name)s - alterado com sucesso!"
+
+#     def get_success_message(self, cleaned_data):
+#         return self.success_message % dict(cleaned_data, fields=self.object.student_id,)
+
   # WHY NEED TO USE ABSOLUTE URL IN MODEL TO CREATEVIEW?
 # class isCoolStudentRegisterView(CreateView):
 #     model = StudentModel
@@ -141,3 +148,16 @@ def iscool_discipline_list_view(request):
 # class isCoolUnderConstruction(TemplateView):
 
 #     template_name = 'iscool/underconstruction.html'
+
+
+# class isCoolStudentDeleteView(SuccessMessageMixin, DeleteView):
+#     model = StudentModel
+#     template_name = 'iscool/student/student_delete.html'
+#     success_url = reverse_lazy('student_list')
+
+#     success_message = "%(name)s - Deletado com sucesso!"
+
+#     def delete(self, request, *args, **kwargs):
+#         obj = self.get_object()
+#         messages.success(self.request, self.success_message % obj.__dict__)
+#         return super(isCoolStudentDeleteView, self).delete(request, *args, **kwargs)

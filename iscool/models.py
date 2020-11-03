@@ -37,16 +37,16 @@ class StudentModel(models.Model):
     def __str__(self):
         return self.name
 
-        # WHY NEED TO USE ABSOLUTE URL TO CREATEVIEW?
-
+        
+        #CREATE A LINK TO USE OTHERS FUNCTIONS
     def get_absolute_url(self):
         return reverse('student_detail', args=[self.student_id])
 
     def get_absolute_url_delete(self):
-        return reverse('student_delete', args=[self.pk])
+        return reverse('student_delete', args=[self.student_id])
 
     def get_absolute_url_update(self):
-        return reverse('student_edit', args=[self.pk])
+        return reverse('student_edit', args=[self.student_id])
 
 
 class Student_has_Discipline(models.Model):

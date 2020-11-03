@@ -1,17 +1,16 @@
-
 {% extends 'base.html' %}
 
 {% block title %} {{block.super}} - Student List {% endblock title %}
 
-{% block content %} 
+{% block content %}
 
-<h1 class = 'p-3 mb-2 bg-info text-dark'>Lista de Estudantes</h1>
+<h1 class='p-3 mb-2 bg-info text-dark'>Lista de Estudantes</h1>
 
 <div class="active-cyan-3 active-cyan-4 mb-4">
-    
+
     <form action="{% url 'student_list' %}" method="get">
-    <input name="query_student_name" class="form-control" type="text" placeholder="Search" aria-label="Search"> 
-       
+        <input name="query_student_name" class="form-control" type="text" placeholder="Search" aria-label="Search">
+
 
         <!-- <select name="query_age" >
             <option selected="selected">Idade</option>   
@@ -25,29 +24,29 @@
 </div>
 <p>
 <div>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
 </div>
-<hr/>
-{% for StudentModel in object_list %}
-    <div>Matrícula: <a href="{{StudentModel.get_absolute_url}}">{{StudentModel.student_id}}</a></div>
-    <div>Nome: {{StudentModel.name}}</div>    
-    <div>Idade: {{StudentModel.age }}</div>
-    <a href="{{ StudentModel.get_absolute_url_update}}">Edit</a> 
-    <a href="{{ StudentModel.get_absolute_url_delete }}">Delete</a> 
-    <hr/>
-    {% empty %}
-    <h2>Nenhum aluno encontrado</h2>
-
-   
-    <p>
-    
-{% endfor%}
+<hr />
+{% for StudentModel in StudentModels %}
+<div>Matrícula: <a href="{{StudentModel.get_absolute_url}}">{{StudentModel.student_id}}</a></div>
+<div>Nome: {{StudentModel.name}}</div>
+<div>Idade: {{StudentModel.age }}</div>
+<a href="{{ StudentModel.get_absolute_url_update}}">Edit</a>
+<a href="{{ StudentModel.get_absolute_url_delete }}">Delete</a>
+<hr />
+{% empty %}
+<h2>Nenhum aluno encontrado</h2>
 
 
-{% endblock content %}
+<p>
+
+    {% endfor%}
+
+
+    {% endblock content %}
