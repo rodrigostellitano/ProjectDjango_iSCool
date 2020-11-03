@@ -1,5 +1,4 @@
 *.txt
 *.jpg
 .vscode
-password.py
-dbInserts
+.DocumentsFile
