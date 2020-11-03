@@ -1,4 +1,5 @@
 *.txt
 *.jpg
 .vscode
-.DocumentsFile
+DocumentFiles
+DocumentFiles/**/*
